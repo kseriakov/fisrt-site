@@ -1,0 +1,68 @@
+{% load cars_tags %}
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <!-- Обязательные метатеги -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/cars.css' %}" rel="stylesheet">
+
+    <title>{% block title %}Привет мир!{% endblock %}</title>
+</head>
+<body>
+<nav class="py-2 bg-light border-bottom">
+    <div class="container d-flex flex-wrap">
+        <ul class="nav me-auto">
+            <li class="nav-item"><a href="{% url 'home' %}" class="nav-link link-dark px-2 active" aria-current="page">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item"><a href="{% url 'add_car' %}" class="nav-link link-dark px-2">Добавить запись</a></li>
+            {% if user.is_staff %}
+            <li class="nav-item"><a href="{% url 'brands_formset' %}" class="nav-link link-dark px-2">Изменить
+                бренды</a></li>
+            {% endif %}
+            {% endif %}
+            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">About</a></li>
+        </ul>
+        <ul class="nav">
+            {% if not user.is_authenticated %}
+            <li class="nav-item"><a href="{% url 'login' %}" class="nav-link link-dark px-2">Войти</a></li>
+            {% else %}
+            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Приветствую, {{ user.first_name }} {{ user.last_name }}! </a></li>
+            <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link link-dark px-2">Выйти</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<header class="py-3 mb-4 border-bottom">
+    <div class="container d-flex flex-wrap justify-content-center">
+        <a href="{% url 'home' %}" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+            <span class="fs-4">Сайт об автомобилях</span>
+        </a>
+        {% get_list_of_brands %}
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0">
+            <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
+    </div>
+
+</header>
+<main>
+    {% include 'cars/pagination.html' %}
+
+                {% block content %}
+                {% endblock %}
+
+
+    {% include 'cars/pagination.html' %}
+</main>
+
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>
+

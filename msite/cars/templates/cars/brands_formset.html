@@ -1,0 +1,29 @@
+{% extends 'cars/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="container shadow-lg p-1 bg-light pt-3" style="width: 60%;">
+        <div class="container ms-auto me-auto mb-3" style="width:25%">
+            <button type="submit" class="btn" style="background-color: #C3DDD1 !important">Применить изменения</button>
+        </div>
+        <div class="container ms-auto me-auto" style="width:50%">
+            {{ formset.non_form_errors }}
+
+            {{ formset.as_p }}
+        </div>
+        <div class="container ms-auto me-auto" style="width:25%">
+            <button type="submit" class="btn mb-2" style="background-color: #C3DDD1 !important">Применить изменения
+            </button>
+
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+

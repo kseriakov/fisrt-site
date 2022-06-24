@@ -1,0 +1,41 @@
+{% extends 'cars/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+{% if not user.is_authenticated %}
+
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="container shadow-lg p-1 bg-light pt-3" style="width: 60%;">
+
+        <div class="mb-3 ms-auto me-auto text-center" style="width: 90%;">
+            {% if form.errors %}
+            <h3>Введен неверный логин или пароль</h3>
+            {% elif request.GET %}
+            <h3>У вас недостаточно прав для просмотра данной страницы</h3>
+            <br>
+            <h5>Попробуйте войти под другим пользователем</h5>
+            {% else %}
+            <h3>Введите логин и пароль</h3>
+            {% endif %}
+        </div>
+
+        <div class="mb-3 ms-auto me-auto" style="width: 50%;">
+            {{ form.as_p }}
+        </div>
+        <div class="container ms-auto me-auto mb-2" style="width:15%">
+            <button type="submit" class="btn" style="background-color: #C3DDD1 !important">Войти</button>
+        </div>
+    </div>
+</form>
+{% else %}
+<div class="text-center">
+    <h1>Вход уже был выполнен</h1>
+</div>
+{% endif %}
+
+{% endblock %}

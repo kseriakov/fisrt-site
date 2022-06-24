@@ -1,0 +1,17 @@
+<p>
+    <a class="btn btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+       aria-expanded="false" aria-controls="collapseExample">
+        <i>Добавить комментарий</i>
+    </a>
+</p>
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="container">
+                <button type="submit" class="btn" style="background-color: #C3DDD1 !important">Отправить</button>
+            </div>
+        </form>
+    </div>
+</div>

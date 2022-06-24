@@ -1,0 +1,31 @@
+<div class="container" style="width: 20%;">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page.number|add:"-2" > 0 %}
+            <li class="page-item">
+                <a class="page-link" href="{% url 'home' %}?page={{ page.number|add:'-2' }}" aria-label="Previous">
+                    <span style="color: #808080 !important;">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for num_page in paginator.page_range %}
+            {% if num_page|add:"1" >= page.number and num_page|add:"-1" <= page.number and num_page != page.number %}
+            <li class="page-item"><a class="page-link" href="{% url 'home' %}?page={{ num_page }}" style="color: #808080 !important;">{{ num_page }}</a></li>
+            {% endif %}
+            {% if num_page == page.number %}
+            <li class="page-item" style="background-color:#D3D3D3 !important;"><a class="page-link" href="#" style="background-color:#A9A9A9; color: #F0F8FF !important;">{{ num_page }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if page.number|add:"2" <= paginator.num_pages %}
+            <li class="page-item">
+                <a class="page-link" href="{% url 'home' %}?page={{ page.number|add:'2' }}" aria-label="Next">
+                    <span style="color: #808080 !important;">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+</div>

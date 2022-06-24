@@ -1,0 +1,77 @@
+{% load cars_tags %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            {% if cars %}
+            {% for car in cars %}
+            <div class="container shadow-lg p-1 bg-light mb-3" style="">
+                <div class="row gx-2 align-items-center">
+                    <div class="col-md-5 pe-0">
+                        <div class="p-3"><img src="{{ car.image.url }}" class="img-fluid"></div>
+                    </div>
+                    <div class="col-md-7 ps-0">
+                        <div class="p-3 " style="height: 100%">
+                            {% include 'cars/features_cars.html' %}
+                            <div class="btn-car-post">
+                                <div class="btn-car">
+                                    <a class="btn btn-info" href="{% url 'load_photo' car.pk %}" role="button"
+                                       style="background-color: #C3DDD1; border: none !important">Скачать фото</a>
+                                </div>
+                                {% if user.is_staff %}
+                                <div class="btn-car">
+                                    <a class="btn btn-info change-car" href="{% url 'edit_car' car.slug %}"
+                                       role="button"
+                                       style="background-color: #C3DDD1; border: none !important">Изменить запись</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gx-0">
+                    <div class="p-3"><p style="font-family: Comic Sans MS, Comic Sans, cursive;">
+                        {{ car.content|truncatechars:350|linebreaksbr }}
+                        <a href="{{ car.get_absolute_url }}">Подробнеe</a></p></div>
+                    <div class="card-footer text-muted" style="font-size: 16px; font-family: Monotype Corsiva, cursive">
+                        Запись создана: {{ car.create_at|date:'j E Y' }} г.
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <div class="container shadow-lg p-1 bg-light mb-3" style="">
+                <div class="row gx-2 align-items-center">
+                    <div class="col-md-5 pe-0">
+                        <div class="p-3 "><img src="{{ car.image.url }}" class="img-fluid"></div>
+                    </div>
+                    <div class="col-md-7 ps-0">
+                        <div class="p-3 " style="height: 100%">
+                            {% include 'cars/features_cars.html' %}
+                            <a class="btn btn-info" href="{% url 'load_photo' car.pk %}" role="button"
+                               style="background-color: #C3DDD1; border: none !important">Скачать фото</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gx-0">
+                    <div class="p-3"><p style="font-family: Comic Sans MS, Comic Sans, cursive;">{{car.content|linebreaksbr}}</p></div>
+                    <div class="card-footer text-muted" style="font-size: 16px; font-family: Monotype Corsiva, cursive">
+                        Запись создана: {{ car.create_at|date:'j E Y' }} г.
+                    </div>
+
+                    <div class="card mb-3 mt-3 bg-light" >
+                        <div>
+                            {% include 'cars/add_comment.html' %}
+                        </div>
+                        {% get_all_comments car %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-2">
+            {% get_5_last_comments %}
+        </div>
+    </div>
+</div>

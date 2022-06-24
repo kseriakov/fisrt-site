@@ -1,0 +1,30 @@
+{% load cars_tags %}
+
+<table class="table">
+    <tbody>
+    <tr>
+        <th scope="row">{% get_verbose_field_name car 'year' %}</th>
+        <td>{{ car.year }}</td>
+    </tr>
+    <tr>
+        <th scope="row">{% get_verbose_field_name car 'engine_capacity' %}</th>
+        <td>{{ car.engine_capacity }}</td>
+    </tr>
+    <tr>
+        <th scope="row">{% get_verbose_field_name car 'engine_power' %}</th>
+        <td>{{ car.engine_power }}</td>
+    </tr>
+    <tr>
+        <th scope="row">{% get_verbose_field_name car 'type_of_engine' %}</th>
+        <td>{{ car.get_type_of_engine_display }}</td>
+    </tr>
+    <tr>
+        <th scope="row">{% get_verbose_field_name car 'transmission' %}</th>
+        <td>{{ car.get_transmission_display }}</td>
+    </tr>
+    <tr>
+        <th scope="row">{% get_verbose_field_name car 'drive' %}</th>
+        <td>{{ car.get_drive_display }}</td>
+    </tr>
+    </tbody>
+</table>

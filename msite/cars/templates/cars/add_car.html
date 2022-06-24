@@ -1,0 +1,46 @@
+{% extends 'cars/base.html' %}
+{% load cars_tags %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container shadow-lg p-1 bg-light pt-3" style="width: 60%;">
+        <div class="container ms-auto me-auto" style="width:20%">
+            <button type="submit" class="btn" style="background-color: #C3DDD1 !important">Добавить запись</button>
+        </div>
+        <div>
+            {{ form.non_field_errors }}
+        </div>
+        {% for field in form %}
+        <div class="mb-3 ms-auto me-auto" style="width: 50%;">
+
+            {% if field.name == 'image' %}
+            {% block insert_image %}
+            {% endblock %}
+            {% endif %}
+
+            
+            <label for="{{ field.id_for_label }}" class="form-label">
+                {% if field.html_name != 'captcha' %}
+                {% get_verbose_field_name_in_form field.html_name %}:
+                {% else %}
+                {{ field.label }}
+                {% endif %}
+            </label>
+            {{ field }}
+            <div class="invalid-form-field">
+                {{ field.errors }}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="container ms-auto me-auto" style="width:20%">
+            <button type="submit" class="btn" style="background-color: #C3DDD1 !important">Добавить запись</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

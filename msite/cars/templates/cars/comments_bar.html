@@ -1,0 +1,14 @@
+{% load cars_tags %}
+
+{% for item in set_of_comments %}
+<div class="card" style="">
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 "><a href="{{ item.1.get_absolute_url }}" class="text-muted btn m-0 p-0">{{ item.1|truncatechars:20 }}</a></h6>
+    <p class="card-text small">{{ item.0.content|truncatechars:50 }}</p>
+    <p class="small text-muted">{{ item.0.create_at|timesince }} ago</p>
+    <a href="{{ item.1.get_absolute_url }}" class="card-link text-muted fst-italic">Подробнее</a>
+  </div>
+</div>
+{% endfor %}
+
+

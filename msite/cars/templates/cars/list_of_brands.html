@@ -1,0 +1,14 @@
+<div class="dropdown me-4">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+       data-bs-toggle="dropdown" aria-expanded="false">Выбрать марку авто</a>
+
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        {% for brand in brands %}
+        {% if brand != brand_selected %}
+        <li><a class="dropdown-item" href="{{ brand.get_absolute_url }}">{{ brand }}</a></li>
+        {% else %}
+        <li><a class="dropdown-item active" href="#">{{ brand }}</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</div>

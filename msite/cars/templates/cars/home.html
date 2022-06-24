@@ -1,0 +1,17 @@
+{% extends 'cars/base.html' %}
+
+{% block title %}
+{% if title %}
+{{ title }}
+{% else %}
+{{ block.super }}
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+
+{% include 'cars/content.html' %}
+
+{% endblock %}

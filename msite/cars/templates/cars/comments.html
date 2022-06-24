@@ -1,0 +1,17 @@
+<div class="row g-0">
+    <h5 class="text-center align-bottom pt-2 card-title">Комментарии</h5>
+</div>
+
+{% for comment in comments %}
+<div class="row g-0 border-top">
+    <div class="col-md-2 border-end">
+        <p class="text-center align-middle pt-1 m-0">{{ comment.user.username }}</p>
+        <p class="card-text text-center m-0"><small class="text-muted">{{ comment.create_at|date:"SHORT_DATE_FORMAT" }} | {{ comment.create_at|time:"H:i" }}</small></p>
+    </div>
+    <div class="col-md-10">
+        <div class="card-body">
+            <p class="card-text">{{ comment.content }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}

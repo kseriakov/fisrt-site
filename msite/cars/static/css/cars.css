@@ -1,0 +1,33 @@
+.invalid-form-field,
+ .errorlist{
+    color: #4682B4;
+    font-family: Trebuchet MS, sans-serif;
+}
+
+.change-car {
+    margin-right: auto;
+}
+.btn-car-post {
+
+}
+
+.btn-car-post::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.btn-car-post .btn-car {
+    display: float;
+}
+
+.btn-car-post .btn-car:nth-of-type(1) {
+    float: left;
+}
+
+.btn-car-post .btn-car:nth-of-type(2) {
+    float: right;
+}
+.errorlist.nonfield {
+    color: red;
+}
